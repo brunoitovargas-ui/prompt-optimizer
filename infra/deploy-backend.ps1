@@ -5,7 +5,7 @@ $ErrorActionPreference = 'Stop'
 Push-Location "$PSScriptRoot\..\backend"
 try {
   Write-Host "==> Instalando deps de produção..."
-  npm ci --omit=dev
+  npm install --omit=dev --workspaces=false --install-links | Out-Null
 
   Write-Host "==> Empacotando..."
   if (Test-Path lambda.zip) { Remove-Item lambda.zip }

@@ -24,6 +24,9 @@ $roleArn = "arn:aws:iam::${accountId}:role/$($Config.LambdaRoleName)"
 
 Push-Location "$PSScriptRoot\..\backend"
 try {
+  Write-Host "==> Instalando deps de produção em backend/node_modules..."
+  npm install --omit=dev --workspaces=false --install-links | Out-Null
+
   Write-Host "==> Empacotando backend..."
   if (Test-Path lambda.zip) { Remove-Item lambda.zip }
   Compress-Archive -Path *.js, steps, lib, node_modules, package.json -DestinationPath lambda.zip
@@ -44,16 +47,24 @@ try {
   $url = aws lambda create-function-url-config `
     --function-name $Config.LambdaName `
     --auth-type NONE `
-    --cors '{"AllowOrigins":["*"],"AllowMethods":["POST"],"AllowHeaders":["content-type"]}' `
+    --cors file://$PSScriptRoot/function-url-cors.json `
     --region $Config.AwsRegion `
     --query FunctionUrl --output text
 
+  # Console AWS exige AS DUAS permissões para acesso público em contas novas.
   aws lambda add-permission `
     --function-name $Config.LambdaName `
     --statement-id FunctionURLAllowPublic `
     --action lambda:InvokeFunctionUrl `
     --principal '*' `
     --function-url-auth-type NONE `
+    --region $Config.AwsRegion | Out-Null
+
+  aws lambda add-permission `
+    --function-name $Config.LambdaName `
+    --statement-id FunctionURLAllowPublicInvoke `
+    --action lambda:InvokeFunction `
+    --principal '*' `
     --region $Config.AwsRegion | Out-Null
 
   Write-Host ""

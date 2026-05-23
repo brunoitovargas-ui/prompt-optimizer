@@ -7,3 +7,6 @@ dist/
 .vite/
 .cache/
 .claude/settings.local.json
+out.json
+lambda.zip
+.env.production
