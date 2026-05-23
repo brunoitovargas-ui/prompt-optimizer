@@ -96,7 +96,7 @@ export function ResultPanel({ state }: { state: OptimizerState }) {
           </span>
           <span className="text-xs">
             paga em{' '}
-            {Number.isFinite(savings.breakevenRuns) ? savings.breakevenRuns.toFixed(1) : '∞'} execuções
+            {savings.breakevenRuns != null ? savings.breakevenRuns.toFixed(1) : '∞'} execuções
           </span>
         </div>
         <div className="mt-3 flex items-baseline gap-2">
