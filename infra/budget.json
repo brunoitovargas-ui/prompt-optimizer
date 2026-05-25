@@ -1,0 +1,6 @@
+{
+  "BudgetName": "prompt-optimizer-monthly",
+  "BudgetLimit": { "Amount": "5", "Unit": "USD" },
+  "TimeUnit": "MONTHLY",
+  "BudgetType": "COST"
+}

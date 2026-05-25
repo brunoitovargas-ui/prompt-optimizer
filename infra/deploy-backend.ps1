@@ -5,7 +5,8 @@ $ErrorActionPreference = 'Stop'
 Push-Location "$PSScriptRoot\..\backend"
 try {
   Write-Host "==> Instalando deps de produção..."
-  npm install --omit=dev --workspaces=false --install-links | Out-Null
+  # 2>&1 + Out-Null para impedir que stderr de notices npm dispare o ErrorActionPreference.
+  npm install --omit=dev --workspaces=false --install-links --silent 2>&1 | Out-Null
 
   Write-Host "==> Empacotando..."
   if (Test-Path lambda.zip) { Remove-Item lambda.zip }

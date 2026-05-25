@@ -25,7 +25,7 @@ $roleArn = "arn:aws:iam::${accountId}:role/$($Config.LambdaRoleName)"
 Push-Location "$PSScriptRoot\..\backend"
 try {
   Write-Host "==> Instalando deps de produção em backend/node_modules..."
-  npm install --omit=dev --workspaces=false --install-links | Out-Null
+  npm install --omit=dev --workspaces=false --install-links --silent 2>&1 | Out-Null
 
   Write-Host "==> Empacotando backend..."
   if (Test-Path lambda.zip) { Remove-Item lambda.zip }

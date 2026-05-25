@@ -1,5 +1,8 @@
 {
-  "AllowOrigins": ["*"],
+  "AllowOrigins": [
+    "https://main.d2bi1xssyw0yo0.amplifyapp.com",
+    "http://localhost:5173"
+  ],
   "AllowMethods": ["POST"],
   "AllowHeaders": ["content-type"]
 }

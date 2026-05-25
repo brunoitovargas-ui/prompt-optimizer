@@ -47,6 +47,10 @@ export default function App() {
           <p className="mt-1 text-sm text-neutral-600">
             Cole um prompt, escolha o modelo que você usa, descubra se dá para gastar menos.
           </p>
+          <p className="mt-3 rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
+            Privacidade: seu prompt é enviado para a Anthropic (EUA) para processamento. Não armazenamos.
+            Não cole dados pessoais, credenciais ou informações confidenciais.
+          </p>
         </header>
 
         <form onSubmit={onSubmit} className="space-y-5">
